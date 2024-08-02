@@ -17,6 +17,10 @@ const Dashboard = () => {
   const [currentClientId, setCurrentClientId] = useState(null);
   const [showUserModal, setShowUserModal] = useState(false);
   const [showClientModal, setShowClientModal] = useState(false);
+  const [employees, setEmployees] = useState([]);
+  const [selectedEmployeeIds, setSelectedEmployeeIds] = useState([]);
+  console.log(selectedEmployeeIds, "<-- employe id");
+  console.log(employees, "<-- employe");
 
 
   const navigate = useNavigate();
@@ -63,6 +67,52 @@ const Dashboard = () => {
       getUserData();
     }
   }, [user]);
+
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const usersCollection = collection(db, "users");
+        const q = query(usersCollection, where("role", "array-contains", "employee"));
+        const querySnapshot = await getDocs(q);
+        const employeeList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          name: doc.data().name
+        }));
+        setEmployees(employeeList);
+      } catch (error) {
+        console.error("Error fetching employees:", error);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
+
+  const renderEmployeeDropdown = () => {
+    const handleSelectChange = (e) => {
+      const options = Array.from(e.target.selectedOptions, option => option.value);
+      setSelectedEmployeeIds(options);
+    };
+
+    return (
+      <div className="mb-3">
+        <label htmlFor="employee">Select Employees</label>
+        <select
+          id="employee"
+          className="form-control"
+          multiple
+          onChange={handleSelectChange}
+          value={selectedEmployeeIds}
+        >
+          {employees.map((employee) => (
+            <option key={employee.id} value={employee.id}>
+              {employee.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  };
+
 
   const openUserModal = (user) => {
     setEditingUser(user);
@@ -136,7 +186,7 @@ const Dashboard = () => {
           sitelocation: values.sitelocation,
           siteaddress: values.siteaddress,
           sitename: values.sitename,
-          users: [],
+          users: selectedEmployeeIds,
           createdat: new Date().toISOString(),
           poc: values.poc,
         });
@@ -157,6 +207,7 @@ const Dashboard = () => {
               sitename: values.sitename,
               poc: values.poc,
               createdat: new Date().toISOString(),
+              users: selectedEmployeeIds
             }],
           },
         ]);
@@ -169,6 +220,7 @@ const Dashboard = () => {
           timer: 1500
         });
         formik.resetForm();
+        selectedEmployeeIds([]);
       } catch (error) {
         console.error("Error adding document: ", error);
       }
@@ -323,9 +375,7 @@ const Dashboard = () => {
     }
   };
 
-
-
-
+  const clientData = users.filter(user => user?.role?.includes('client'));
 
   return (
     <div>
@@ -470,6 +520,9 @@ const Dashboard = () => {
                     <small className="text-danger">{formik.errors.poc}</small>
                   ) : null}
                 </div>
+
+                {renderEmployeeDropdown()}
+
                 <button type="submit" className="btn btn-primary w-25 my-3">Submit</button>
               </form>
             </div>
@@ -477,12 +530,11 @@ const Dashboard = () => {
 
           <div className="container-fluid">
             <h2>Users and Clients</h2>
-            {users.length > 0 ? (
+            {clientData.length > 0 ? (
               <div className="my-3 d-flex gap-4 flex-wrap">
-                {users.map((user) => (
+                {clientData.map((user) => (
                   <div key={user.id} className="card mt-3">
                     <div className="card-body">
-
                       <h4>Users</h4>
                       <p>Name: {user.name}</p>
                       <p>Email: {user.email}</p>
