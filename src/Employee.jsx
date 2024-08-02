@@ -143,6 +143,9 @@ const Employee = () => {
                </nav>
 
                <div className="container mt-4">
+
+                    <h2 className='text-center'>Add Employee</h2>
+
                     <Formik
                          initialValues={initialValues}
                          validationSchema={validationSchema}
