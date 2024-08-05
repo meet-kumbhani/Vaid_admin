@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 // import ProtectedRoute from './ProtectedRoute';
 import { auth } from './firebase.config';
 import Employee from './Employee';
+import EmployeeDetails from './EmployeeDetails';
 // import PublicRoute from './PublicRoute';
 
 const App = () => {
@@ -39,6 +40,10 @@ const App = () => {
           <Route
             path="/employee"
             element={<Employee />}
+          />
+          <Route
+            path="/employeeDetails/:id"
+            element={<EmployeeDetails />}
           />
         </Routes>
       </BrowserRouter>
