@@ -5,6 +5,8 @@ import Dashboard from './Dashboard';
 import 'bootstrap/dist/css/bootstrap.css';
 // import ProtectedRoute from './ProtectedRoute';
 import { auth } from './firebase.config';
+import Evidences from './Evidences';
+import EvidenceDetails from './EvidenceDetails';
 // import PublicRoute from './PublicRoute';
 
 const App = () => {
@@ -34,6 +36,14 @@ const App = () => {
           <Route
             path="/dashboard"
             element={<Dashboard />}
+          />
+          <Route
+            path="/evidence"
+            element={<Evidences />}
+          />
+          <Route
+            path="/evidencedetails/:id"
+            element={<EvidenceDetails />}
           />
         </Routes>
       </BrowserRouter>
