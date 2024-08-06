@@ -225,7 +225,7 @@ const Employee = () => {
                          <h2>Employee List</h2>
                          <div className='d-flex gap-3'>
                               {employees.map(employee => (
-                                   <div key={employee.id} className="card mt-3" style={{ width: "18rem" }}>
+                                   <Link to={`/employeeDetails/${employee.id}`} key={employee.id} className="card mt-3 nav-link" style={{ width: "18rem" }}>
                                         <div className='card-body'>
                                              <p>Name: {employee.name}</p>
                                              <p>Email: {employee.email}</p>
@@ -236,7 +236,7 @@ const Employee = () => {
                                                   <button onClick={() => handleDelete(employee.id)} className='ms-3 btn btn-danger'>Delete</button>
                                              </div>
                                         </div>
-                                   </div>
+                                   </Link>
                               ))}
                          </div>
                     </div>
