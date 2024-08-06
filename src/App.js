@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { auth } from './firebase.config';
 import Employee from './Employee';
 import EmployeeDetails from './EmployeeDetails';
+import Evidences from './Evidences';
+import EvidenceDetails from './EvidenceDetails';
 // import PublicRoute from './PublicRoute';
 
 const App = () => {
@@ -44,6 +46,14 @@ const App = () => {
           <Route
             path="/employeeDetails/:id"
             element={<EmployeeDetails />}
+          />
+          <Route
+            path="/evidence"
+            element={<Evidences />}
+          />
+          <Route
+            path="/evidencedetails/:id"
+            element={<EvidenceDetails />}
           />
         </Routes>
       </BrowserRouter>

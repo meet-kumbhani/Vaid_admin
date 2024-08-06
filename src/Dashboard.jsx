@@ -393,11 +393,9 @@ const Dashboard = () => {
                     <Link className="nav-link active" aria-current="page" to={"/dashboard"}>Client</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to={"/employee"}>Employee</Link>
+                    <Link className="nav-link active" aria-current="page" to={"/evidence"}>evidence</Link>
                   </li>
                 </ul>
-
-
                 <form className="d-flex ms-auto">
                   <button onClick={handleLogout} className="btn btn-danger">Log-Out</button>
                 </form>
