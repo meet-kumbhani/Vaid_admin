@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { auth, db } from "./firebase.config";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Modal } from "react-bootstrap";
@@ -318,7 +318,6 @@ const Dashboard = () => {
           await deleteDoc(doc(clientsCollection, clientDoc.id));
         });
 
-        // Update state to remove the user and their clients
         setUsers(users.filter(user => user.id !== userId));
 
         await Swal.fire({
@@ -353,7 +352,6 @@ const Dashboard = () => {
         const clientDocRef = doc(db, "clients", clientId);
         await deleteDoc(clientDocRef);
 
-        // Update state to remove the client
         setUsers(users.map(user => ({
           ...user,
           clients: user.clients.filter(client => client.id !== clientId),
@@ -390,6 +388,16 @@ const Dashboard = () => {
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li className="nav-item">
+                    <Link className="nav-link active" aria-current="page" to={"/dashboard"}>Client</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link active" aria-current="page" to={"/employee"}>Employee</Link>
+                  </li>
+                </ul>
+
+
                 <form className="d-flex ms-auto">
                   <button onClick={handleLogout} className="btn btn-danger">Log-Out</button>
                 </form>
