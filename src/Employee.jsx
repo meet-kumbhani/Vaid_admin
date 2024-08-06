@@ -132,7 +132,13 @@ const Employee = () => {
                                         <Link className="nav-link active" aria-current="page" to={"/dashboard"}>Client</Link>
                                    </li>
                                    <li className="nav-item">
-                                        <Link className="nav-link active" aria-current="page" to={"/employee"}>Employee</Link>
+                                        <Link className="nav-link active" aria-current="page" to={"/employee"}>employee</Link>
+                                   </li>
+                                   <li className="nav-item">
+                                        <Link className="nav-link active" aria-current="page" to={"/evidence"}>evidence</Link>
+                                   </li>
+                                   <li className="nav-item">
+                                        <Link className="nav-link active" aria-current="page" to={"/inbox"}>inbox</Link>
                                    </li>
                               </ul>
                               <form className="d-flex ms-auto">

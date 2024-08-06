@@ -48,6 +48,9 @@ const Evidences = () => {
                                         <Link className="nav-link active" aria-current="page" to={"/dashboard"}>Client</Link>
                                    </li>
                                    <li className="nav-item">
+                                        <Link className="nav-link active" aria-current="page" to={"/employee"}>employee</Link>
+                                   </li>
+                                   <li className="nav-item">
                                         <Link className="nav-link active" aria-current="page" to={"/evidence"}>evidence</Link>
                                    </li>
                                    <li className="nav-item">
