@@ -9,6 +9,7 @@ import Employee from './Employee';
 import EmployeeDetails from './EmployeeDetails';
 import Evidences from './Evidences';
 import EvidenceDetails from './EvidenceDetails';
+import Inbox from './AdminInbox';
 // import PublicRoute from './PublicRoute';
 
 const App = () => {
@@ -50,6 +51,10 @@ const App = () => {
           <Route
             path="/evidence"
             element={<Evidences />}
+          />
+          <Route
+            path="/inbox"
+            element={<Inbox />}
           />
           <Route
             path="/evidencedetails/:id"
